@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.106
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToWave", "ToWave\ToWave.csproj", "{88D12BA5-D724-41CA-9C9B-EAF12C7C2DDD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{88D12BA5-D724-41CA-9C9B-EAF12C7C2DDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88D12BA5-D724-41CA-9C9B-EAF12C7C2DDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88D12BA5-D724-41CA-9C9B-EAF12C7C2DDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88D12BA5-D724-41CA-9C9B-EAF12C7C2DDD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {67CAEACC-2B45-47E4-9BA6-365DF8A6B520}
+	EndGlobalSection
+EndGlobal
