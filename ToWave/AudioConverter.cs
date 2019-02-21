@@ -4,8 +4,6 @@ using NAudio.Wave;
 using System.IO;
 using System.Collections.Generic;
 
-
-
 namespace ToWave
 {
 
@@ -16,16 +14,22 @@ namespace ToWave
         public string[] FilenameArray { get; set; }
         public string[] OutPutFileArray { get; set; }
         public string DestinationDirectory { get; set; }
+        public bool IsDoneConverting { get; set; }
+
+        private WaveFileWriter writer;
+        private string FileBeingConverted;
 
         public AudioConverter(string filename, string outFile, string desDir)
         {
+            IsDoneConverting = true;//Set to true to avoid starting process that are not needed
             DestinationDirectory = desDir;
             OutPutFile = outFile;
             Filename = filename;
         }
-        
+
         public AudioConverter(List<string> filenames, string[] outFiles, string desDir)
         {
+            IsDoneConverting = true;//Set to true to avoid starting process that are not needed
             DestinationDirectory = desDir;
             FilenameArray = ListToString(filenames);
             OutPutFileArray = outFiles;
@@ -34,12 +38,16 @@ namespace ToWave
 
         private void ConvertFile(string Filename, string outputfile)
         {
+            
             using (AudioFileReader reader = new AudioFileReader(Filename))
-            using (WaveFileWriter writer = new WaveFileWriter(outputfile, reader.WaveFormat))
             {
+                writer = new WaveFileWriter(outputfile, reader.WaveFormat);
+                IsDoneConverting = false;
                 reader.CopyTo(writer);
             }
-
+            IsDoneConverting = true;
+            writer.Close();
+            writer.Dispose();
         }
         
         //Converts Multiple files at once      
@@ -48,6 +56,7 @@ namespace ToWave
             int count = 0;
             foreach (string filename in FilenameArray)
             {
+                FileBeingConverted = filename;
                 ConvertFile(filename, Path.Combine(DestinationDirectory, OutPutFileArray[count]));
                 count++;
             }
@@ -64,7 +73,8 @@ namespace ToWave
             }
             else
             {
-                ConvertFile(Filename, Path.Combine(DestinationDirectory, OutPutFile));
+                ConvertFile(FilenameArray[0], Path.Combine(DestinationDirectory, OutPutFile));
+                FileBeingConverted = FilenameArray[0];
             }
         }
 
@@ -80,6 +90,21 @@ namespace ToWave
             }
 
             return names;
+        }
+        /// <summary>
+        /// Returns progress of conversion of file in terms of bytes written
+        /// </summary>
+        public long GetCurrentFileSize()
+        {
+            return writer.Length;
+        }
+        /// <summary>
+        /// Returns name of file being converted
+        /// </summary>
+        /// <returns>String</returns>
+        public string GetNameFileBeingConverted()
+        {
+            return FileBeingConverted;
         }
     }
 }

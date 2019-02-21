@@ -15,6 +15,8 @@ namespace ToWave
     {
         AudioConverter audioConverter;
         List<string> FileNames;
+        System.Timers.Timer timer = new System.Timers.Timer(200);
+
         public Form1()
         {
             InitializeComponent();
@@ -114,9 +116,11 @@ namespace ToWave
         private void convertBtn_Click(object sender, EventArgs e)
         {
             audioConverter = new AudioConverter(FileNames, GetOutputFilenames(), desDirTextBox.Text);
+            logLabel.Visible = true;
 
             try
             {
+                UpdateLogLabel();
                 audioConverter.Convert();
             }
             catch (Exception error)
@@ -125,6 +129,25 @@ namespace ToWave
             }           
         }
 
-        
+        private void UpdateLogLabel()
+        {
+            Timer timer = new Timer();
+            timer.Interval = 500;
+            timer.Tick += Timer_Tick;
+            timer.Start();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if (audioConverter.IsDoneConverting == false)
+            {
+                logLabel.Text = string.Format("Converting: {0} to Wave file.{1}Size: ", audioConverter.GetNameFileBeingConverted(), audioConverter.GetCurrentFileSize());
+                if (audioConverter.IsDoneConverting == true)
+                {
+                    timer.Stop();
+                }
+            }
+        }
+
     }
 }

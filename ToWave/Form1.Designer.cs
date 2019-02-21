@@ -39,7 +39,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.convertBtn = new System.Windows.Forms.Button();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.logLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // selectFileBtn
@@ -130,20 +130,22 @@
             this.convertBtn.UseVisualStyleBackColor = true;
             this.convertBtn.Click += new System.EventHandler(this.convertBtn_Click);
             // 
-            // progressBar1
+            // logLabel
             // 
-            this.progressBar1.Location = new System.Drawing.Point(2, 366);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(545, 22);
-            this.progressBar1.TabIndex = 11;
-            this.progressBar1.Value = 50;
+            this.logLabel.AutoSize = true;
+            this.logLabel.Location = new System.Drawing.Point(22, 364);
+            this.logLabel.Name = "logLabel";
+            this.logLabel.Size = new System.Drawing.Size(0, 13);
+            this.logLabel.TabIndex = 11;
+            this.logLabel.Text = "Null";
+            this.logLabel.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(550, 389);
-            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.logLabel);
             this.Controls.Add(this.convertBtn);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.removeFileBtn);
@@ -173,7 +175,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Button convertBtn;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label logLabel;
     }
 }
 
